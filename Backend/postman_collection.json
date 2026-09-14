@@ -1,0 +1,158 @@
+{
+  "info": {
+    "name": "Schedora Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth - Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"admin@schedora.local\",\"password\":\"Admin@12345\"}"
+        }
+      }
+    },
+    {
+      "name": "Auth - Register Salon Owner",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/auth/salon-owner/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ownerName\":\"New Partner\",\"email\":\"new.partner@schedora.local\",\"phone\":\"+910000000999\",\"password\":\"Owner@12345\",\"salonName\":\"New Glow Salon\",\"salonDescription\":\"Partner salon application\",\"salonPhone\":\"+910000000998\",\"salonEmail\":\"new.glow@schedora.local\",\"addressLine\":\"MG Road\",\"city\":\"Bengaluru\",\"state\":\"Karnataka\",\"pincode\":\"560001\",\"latitude\":12.9716,\"longitude\":77.5946}"
+        }
+      }
+    },
+    {
+      "name": "Owner - Get Salon",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/salon-owner/salon"
+      }
+    },
+    {
+      "name": "Owner - Create Branch",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/salon-owner/branches",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Main Branch\",\"phone\":\"+910000000111\",\"addressLine\":\"MG Road\",\"city\":\"Bengaluru\",\"state\":\"Karnataka\",\"pincode\":\"560001\",\"latitude\":12.9716,\"longitude\":77.5946}"
+        }
+      }
+    },
+    {
+      "name": "Owner - Create Service",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/salon-owner/services",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"branchId\":1,\"name\":\"Haircut\",\"description\":\"Classic haircut\",\"price\":350.00,\"durationMinutes\":30}"
+        }
+      }
+    },
+    {
+      "name": "Owner - Create Staff",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/salon-owner/staff",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"branchId\":1,\"name\":\"Raj Kumar\",\"phone\":\"+910000000222\",\"email\":\"raj@schedora.local\",\"designation\":\"Senior Stylist\",\"serviceIds\":[1]}"
+        }
+      }
+    },
+    {
+      "name": "Admin - Pending Salons",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/salons/pending"
+      }
+    },
+    {
+      "name": "Admin - Approve Salon",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": "{{baseUrl}}/api/admin/salons/1/approve"
+      }
+    }
+  ]
+}
